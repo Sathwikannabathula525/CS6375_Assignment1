@@ -42,8 +42,6 @@ class RNN(nn.Module):
         
         return predicted_op
 
-
-
 def load_data(train_data, val_data):
     with open(train_data) as training_f:
         training = json.load(training_f)
@@ -57,7 +55,6 @@ def load_data(train_data, val_data):
     for elt in validation:
         val.append((elt["text"].split(),int(elt["stars"]-1)))
     return tra, val
-
 
 if __name__ == "__main__":
     parser = ArgumentParser()
