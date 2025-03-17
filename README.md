@@ -8,12 +8,9 @@ This project implements **Feedforward Neural Network (FFNN)** and **Recurrent Ne
 📂 sentiment-analysis-project
 │── ffnn.py               # Implementation of Feedforward Neural Network
 │── rnn.py                # Implementation of Recurrent Neural Network
-│── word_embedding.pkl    # Pretrained word embeddings for RNN
-│── requirements.txt      # List of required dependencies
 │── train.json            # Training dataset
 │── val.json              # Validation dataset
 │── test.json             # Test dataset (if applicable)
-│── report.pdf            # Project report
 │── README.md             # This file
 ```
 
