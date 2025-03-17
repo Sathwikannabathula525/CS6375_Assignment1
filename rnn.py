@@ -30,15 +30,18 @@ class RNN(nn.Module):
         return self.loss(predicted_vector, gold_label)
 
     def forward(self, inputs):
-        # [to fill] obtain hidden layer representation (https://pytorch.org/docs/stable/generated/torch.nn.RNN.html)
-        _, hidden = self.rnn(inputs)
-        # [to fill] obtain output layer representations
-        z = self.W(hidden[-1])
-        # [to fill] sum over output 
-        #summed_output = z
-        # [to fill] obtain probability dist.
-        predicted_vector = self.softmax(summed_output)
-        return predicted_vector
+        batch_size = inputs.shape[1]  
+        hs = torch.zeros(self.numOfLayer, batch_size, self.h, device=inputs.device)
+        
+        rnn_op, hs = self.rnn(inputs, hs)  # Process sequence with RNN
+        
+        op = rnn_op.sum(dim=0)  # Summing across all time steps
+        
+        o = self.W(op)  
+        predicted_op = self.softmax(o)  
+        
+        return predicted_op
+
 
 
 def load_data(train_data, val_data):
@@ -115,7 +118,7 @@ if __name__ == "__main__":
                 vectors = [word_embedding[i.lower()] if i.lower() in word_embedding.keys() else word_embedding['unk'] for i in input_words ]
 
                 # Transform the input into required shape
-                vectors = torch.tensor(vectors).view(len(vectors), 1, -1)
+                vectors = torch.tensor(np.array(vectors)).view(len(vectors), 1, -1)
                 output = model(vectors)
 
                 # Get loss
@@ -156,7 +159,7 @@ if __name__ == "__main__":
             vectors = [word_embedding[i.lower()] if i.lower() in word_embedding.keys() else word_embedding['unk'] for i
                        in input_words]
 
-            vectors = torch.tensor(vectors).view(len(vectors), 1, -1)
+            vectors = torch.tensor(np.array(vectors)).view(len(vectors), 1, -1)
             output = model(vectors)
             predicted_label = torch.argmax(output)
             correct += int(predicted_label == gold_label)
