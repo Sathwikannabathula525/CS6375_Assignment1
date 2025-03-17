@@ -48,11 +48,6 @@ python rnn.py --hidden_dim 100 --epochs 10 --train_data train.json --val_data va
 - **Optimizer:** SGD for FFNN, Adam for RNN.
 - **Training Strategy:** Mini-batch gradient descent with batch size = 16.
 
-## Results & Performance
-| Model  | Training Accuracy | Validation Accuracy |
-|--------|------------------|--------------------|
-| FFNN   | XX%             | XX%                |
-| RNN    | XX%             | XX%                |
 
 ## Contributions
 - Sai Sathwik Annabathula - Implementation & Report
